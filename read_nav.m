@@ -1,11 +1,65 @@
-%% Function: read_nav.m
-function [header, data] = read_nav(input)
-    file = fopen(input);
-    
-
-end
-% This is a function that reads in the Navigation file and returns
+%% This is a function that reads in the Navigation file and returns
 % respective Variables
+
+
+function [header, data] = read_nav(input)
+    file = fopen(input); % Open File
+    
+    % Seperate Header Section 
+    header = textscan(file,'%s',8,'Delimiter','\n');
+    
+    % Data for Each Observation
+    obs = [];
+    while (~feof(file))
+        % Sat PRN and Time and SV?
+        
+        
+        sat_num = textscan(file,'%s',1,'Delimiter','\n');
+        sat_num = sat_num{1};
+        sat_num = insertAfter(sat_num,60,",");
+        
+        
+        % BROKEN FIX LATER
+        if length(sat_num{1}) > 78
+            sat_num = insertAfter(sat_num,41,",");
+        else
+            sat_num = insertAfter(sat_num,40,",");
+        end
+        sat_num = insertAfter(sat_num,22,",");
+        sat_num = insertAfter(sat_num,17,",");
+        sat_num = insertAfter(sat_num,15,",");
+        sat_num = insertAfter(sat_num,12,",");
+        sat_num = insertAfter(sat_num,8,",");
+        sat_num = insertAfter(sat_num,5,",");
+        sat_num = insertAfter(sat_num,2,",");
+        
+        
+        
+        
+        % Values
+        sat_data = textscan(file,'%s',7,'Delimiter','\n');
+        sat_data = sat_data{1};
+        
+        for i = 1:length(sat_data)
+            if strlength(sat_data{i}) > 75
+                sat_data{i} = insertAfter(sat_data{i},57,",");
+                sat_data{i} = insertAfter(sat_data{i},38,",");
+                sat_data{i} = insertAfter(sat_data{i},19,",");    
+            else
+                sat_data{i} = insertAfter(sat_data{i},56,",");
+                sat_data{i} = insertAfter(sat_data{i},37,",");
+                sat_data{i} = insertAfter(sat_data{i},18,",");
+            end
+        end
+        
+        sat_data = strrep(sat_data,"D","e");
+        sat_data = split(sat_data,",");
+        sat_data = double(sat_data);
+        sat_data = [sat_data;zeros(3,4)];
+    end
+    
+    data = sat_data;
+end
 
 
 
