@@ -17,9 +17,7 @@ function [header, data] = read_nav(input)
         sat_num = sat_num{1};
         sat_num = char(sat_num);
 
-        
-        
-        % BROKEN FIX LATER
+        % If there is a single digit at the start of sat info line
         if sat_num(2) == " "
             sat_num = insertAfter(sat_num,59,",");
             sat_num = insertAfter(sat_num,40,",");
@@ -31,6 +29,7 @@ function [header, data] = read_nav(input)
             sat_num = insertAfter(sat_num,4,",");
             sat_num = insertAfter(sat_num,1,",");
 
+        % If there is a double digit at start of sat info line    
         else
             sat_num = insertAfter(sat_num,60,",");
             sat_num = insertAfter(sat_num,41,",");
