@@ -9,9 +9,10 @@ function [header, data] = read_nav(input)
     header = textscan(file,'%s',8,'Delimiter','\n');
     
     % Data for Each Observation
-    sat_n = [];
-    sat_d = [];
-    while (~feof(file))        
+    obs = [];
+    while (~feof(file))
+        % Sat PRN and Time and SV?
+        
         
         sat_num = textscan(file,'%s',1,'Delimiter','\n');
         sat_num = sat_num{1};
@@ -21,15 +22,15 @@ function [header, data] = read_nav(input)
         
         % BROKEN FIX LATER
         if sat_num(2) == " "
-            sat_num = insertAfter(sat_num,59,",");
+            sat_num = insertAfter(sat_num,60,",");
             sat_num = insertAfter(sat_num,40,",");
-            sat_num = insertAfter(sat_num,21,",");
-            sat_num = insertAfter(sat_num,16,",");
-            sat_num = insertAfter(sat_num,13,",");
-            sat_num = insertAfter(sat_num,10,",");
-            sat_num = insertAfter(sat_num,7,",");
-            sat_num = insertAfter(sat_num,4,",");
-            sat_num = insertAfter(sat_num,1,",");
+            sat_num = insertAfter(sat_num,22,",");
+            sat_num = insertAfter(sat_num,17,",");
+            sat_num = insertAfter(sat_num,15,",");
+            sat_num = insertAfter(sat_num,12,",");
+            sat_num = insertAfter(sat_num,8,",");
+            sat_num = insertAfter(sat_num,5,",");
+            sat_num = insertAfter(sat_num,2,",")
 
         else
             sat_num = insertAfter(sat_num,60,",");
@@ -40,13 +41,10 @@ function [header, data] = read_nav(input)
             sat_num = insertAfter(sat_num,12,",");
             sat_num = insertAfter(sat_num,8,",");
             sat_num = insertAfter(sat_num,5,",");
-            sat_num = insertAfter(sat_num,2,",");
+            sat_num = insertAfter(sat_num,2,",")
         end
 
-        sat_num = strrep(sat_num,"D","e");
-        sat_num = split(sat_num,",");
-        sat_num = double(sat_num);
-        sat_n = [sat_n;sat_num];     
+        
         
         
         % Values
@@ -69,9 +67,9 @@ function [header, data] = read_nav(input)
         sat_data = split(sat_data,",");
         sat_data = double(sat_data);
         sat_data = [sat_data;zeros(3,4)];
-        sat_d = [sat_d;sat_data];
     end
-    data = [sat_n,sat_d];
+    
+    data = sat_num;
 end
 
 
