@@ -9,3 +9,18 @@ input = 'brdc0030.21n';
 [h,d] = read_nav(input);
 
 
+
+%% Which Set of Observations
+block = d(1:10,1:5);
+
+
+
+%% Satellite Observations 
+observations = obs(block);
+
+
+
+%% Find Position
+%[x,y,z] = coordinate();
+
+
