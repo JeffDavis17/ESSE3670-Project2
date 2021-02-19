@@ -1,7 +1,0 @@
-%% This is a Function that gathers all the observations from a given satellite reading
-
-function [A,e,t,toe,dn,M0,w,cus,cuc,crs,crc,cis,cic,io,IDOT,OMEGA0,OMEGA] = obs(block)
-
-
-
-end

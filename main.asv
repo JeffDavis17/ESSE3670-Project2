@@ -2,22 +2,27 @@
 % Jeff Davis (214238414) | Ryan Nguyen (216334336)
 clear; close all; clc
 
-
 % Read in Navigation File
 input = 'brdc0030.21n';
 [h,d] = read_nav(input);
 
 
-% Which Set of Observations
+% Ea
 n = 1;
-block = d(n:n+9,:);
+
+pos = [];
+for n = 1:418
+    block = d(n:n+9,:);
 
 
-% Satellite Observations 
-observ = obs(block);
+%% Satellite Observations 
+    observ = obs(block);
 
 
-% Find Position
-[x,y,z] = coordinate(observ)
 
+%% Find Position
+    [x,y,z] = coordinate(observ);
+    pos = [pos;x,y,z];
+    
+end
 

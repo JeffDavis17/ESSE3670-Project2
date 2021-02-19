@@ -1,17 +1,35 @@
 %% This is a Function that determines the ECEF Coordinate position of a satellite
 
 
-function[x, y, z] = coordinate(A, e, t, toe, deltan, M0, w, cus, cuc, crs, crc, cis, cic, i0, IDOT, omega0, omega) %earth-fixed coordinates
+function[x, y, z] = coordinate(observ) %earth-fixed coordinates
+
+A= 
+e
+t
+toe
+deltan
+M0
+w
+cus
+cuc
+crs
+crc
+cis
+cic
+i0
+IDOT
+omega0
+omega
 
 
 % WGS 84 Parameters
 u = 3.986005e14; %WGS84 value of earth's universal gravitational parameter (m^3/s^2)
-omega = 7.2921151467e-5; %WGS84 value of earth's rotation rate 
+omegae = 7.2921151467e-5; %WGS84 value of earth's rotation rate 
 
 
 %e is eccentricity
-A = sqrt(A.^2); % Semi-Major Axis
-n0 = sqrt(u/A.^3); %computed mean motion rad/sec
+A = A^2; % Semi-Major Axis
+n0 = sqrt(u/A^3); %computed mean motion rad/sec
 tk = t - toe; %time from emphemeris reference epoch
 n = n0 + deltan; %computed mean motion
 
@@ -37,15 +55,19 @@ deltauk = cus*sin(2*phik) + cuc*cos(2*phik); %argument of latitude correction
 deltark = crs*sin(2*phik) + crc*cos(2*phik); %radius correction
 deltaik = cis*sin(2*phik) + cic*cos(2*phik); %inclination correction
 
+
 uk = phik + deltauk; %corrected argument of latitude
 rk = A*(1-e*cos(Ek)+deltark); %corrected radius
 ik = i0 + deltaik + IDOT*yk; %inclination correction
 
+% Positions in Orbital Plane
 xkprime = rk*cos(uk);
 ykprime = rk*sin(uk);
 
+% Corrected longitude
 omegak = omega0 + (omega - omegae)*tk - omegae*toe;
 
+% Earth-fixed Coordinates
 x = xkprime*cos(omegak)-ykprime*cos(ik)*sin(omegak);
 y = xkprime*sin(omegak)+ykprime*cos(ik)*cos(omegak);
 z = ykprime*sin(ik);
