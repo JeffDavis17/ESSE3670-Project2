@@ -9,7 +9,8 @@ input = 'brdc0030.21n';
 
 
 % Which Set of Observations
-n = 1;
+n = 3;
+n = n + (n-1)*9;
 block = d(n:n+9,:);
 
 
@@ -18,6 +19,6 @@ observ = obs(block);
 
 
 % Find Position
-[x,y,z] = coordinate(observ)
+[x,y,z] = coordinate(observ);
 
 
