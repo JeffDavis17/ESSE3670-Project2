@@ -24,7 +24,7 @@ E0 = Mk;
 Ek = Mk - e*sin(E0);  %solving iteratively for Eccentric anomaly
 
 c = abs(Ek-E0);
-while c < 10e-10 %iteration equation
+while c >= 10e-10 %iteration equation
     E0 = Ek;
     Ek = Mk - e*sin(E0);
     c = abs(Ek-E0);
