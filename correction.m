@@ -18,7 +18,6 @@ elseif (GPSsat - toc < -302400)
     
 end
     
-
 corr = af0 + af1*(GPSsat - toc) + af2*(GPSsat - toc)^2 + deltr;
 
 satcorr = GPSsat - corr;
