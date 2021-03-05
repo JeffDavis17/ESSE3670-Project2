@@ -1,7 +1,10 @@
+%% This is a function that converts the time of signal reception by the GNSS Receiver to GPS time
+
 function[GPS] = convert(year, month, day, hour, min, sec)
+
 %datenum gives approximately # of julian days since year 0
 start = datenum(1980, 1, 6, 0, 0, 0);%start epoch
-now = datenum(year, month, day, hour, min, sec)%current time for satellite
+now = datenum(year, month, day, hour, min, sec); %current time for satellite
 
 %GPS time the # of seconds in the week coming from cycle, week, then day
 %how many seconds up to that current day in week

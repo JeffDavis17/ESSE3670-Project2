@@ -54,13 +54,13 @@ GPST_rec = convert(y,mn,day,hr,m,s);
 
 
 % System Transmission Time. Need to get Ek and stuff like that?? 
-pseudo = 21324698.809; % Pseudorange - TEMPORARY
-af0 = block(8,1); % Satellite Clock Bias
-af1 = block(9,1); % Satellite Drift 
-af2 = block(10,1); % Satellite Drift Rate
-toc = block(2,1); 
+pseudo = 21324698.809; % Pseudorange
+af0 = 69; % Satellite Clock Bias
+af1 = 69; % Satellite Drift 
+af2 = 69; % Satellite Drift Rate
+toc = 69 %
 
-other_val = correction(GPST_rec,pseudo,af0,af1,af2,toc,A,E,Ek)
+other_val = correction(GPST_rec,pseudo,af0,af1,af2,)
 
 
 

@@ -30,7 +30,7 @@ while c >= 10e-10 %iteration equation
     c = abs(Ek-E0);
 end
 
-vk = atan2(sqrt(1-e^2)*sin(Ek)/(1 - e*cos(Ek)),(cos(Ek-e))/(1 - e*cos(Ek))); %True anomaly
+vk = atan2(sqrt(1-e^2)*sin(Ek),(cos(Ek-e))); %True anomaly
 phik = vk + w; %argument of latitude
 
 
