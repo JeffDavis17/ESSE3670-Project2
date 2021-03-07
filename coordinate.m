@@ -2,6 +2,7 @@
 
 function[x, y, z] = coordinate(observ,Ts,Toc) %earth-fixed coordinates
 
+
 % Variables
 observ = num2cell(observ);
 [A, e, toe, deltan, M0, w, cus, cuc, crs, crc, cis, cic, i0, IDOT, omega0, OMEGADOT, af0, af1, af2] = deal(observ{:});
@@ -18,12 +19,13 @@ n0 = sqrt(u/A^3);
 n = n0 + deltan;
 tk = Ts - toe;
 
+
+
 if tk > 302400
     tk = tk - 604800;
 elseif tk < -302400
     tk = tk + 604800;
 end
-
 
 
 
@@ -72,6 +74,7 @@ ykprime = rk*sin(uk);
 t = correction(Ts, Toc, af0, af1, af2, A, e, Ek);
 tk = t-toe;
 
+
 if tk > 302400
     tk = tk - 604800;
 elseif tk < -302400
@@ -87,6 +90,10 @@ omegak = omega0 + (OMEGADOT - omegae)*tk - omegae*toe;
 x = xkprime*cos(omegak)-ykprime*cos(ik)*sin(omegak);
 y = xkprime*sin(omegak)+ykprime*cos(ik)*cos(omegak);
 z = ykprime*sin(ik);
+
+
+
+
 
 end
 
